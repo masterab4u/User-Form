@@ -1,9 +1,11 @@
 package com.example.singlepageApp.models;
 
 import javax.persistence.Entity;
-import javax.persistence.Column;
+//import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 //import javax.validation.constraints.NotEmpty;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,24 +29,25 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
-	@Size(min = 3, max = 30)
-	@Column(name = "name")
+	@NotEmpty//(message = "Field can't be left empty")
+	@Size(min=2, max=30)//, message = "Has to be in 2-30 chars range")
+	//@Column(name = "name")
 	private String name;
-	@javax.validation.constraints.NotBlank
-	@Column(name = "sex")
+	@NotBlank//(message = "Gender can't be left empty")
+	//@Column(name = "sex")
 	private String sex;
-	@javax.validation.constraints.NotBlank
-	@Column(name = "email")
-	@Email(message = "Please enter a valid e-mail address")
+	//@Column(name = "email")
+	@Email//(message = "Please enter a valid e-mail address")
 	private String email;
 	@NotNull
-	@Column(name = "phone")
+	@Size(min=10, max=10)//, message = "Enter a valid number")
+	//@Column(name = "phone")
 	private String phone;
 	@Size(max = 100)
-	@Column(name = "address")
+	//@Column(name = "address")
 	private String address;
-	@javax.validation.constraints.NotBlank
-	@Column(name = "department")
+	@NotBlank//(message = "Department can't be left empty")
+	//@Column(name = "department")
 	private String department;
 	
 	public User() {
@@ -128,6 +131,7 @@ public class User {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 }

@@ -8,6 +8,7 @@
 <script type="text/javascript" src="validation.js"></script>
 <script type="text/javascript" src="../static/main.js" th:src="@{/main.js}"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" th:href="@{/css/style.css}"/>
 <meta charset="ISO-8859-1">
 <title>User List</title>
 </head>
@@ -19,7 +20,7 @@
     <h3>CREATE USER</h3>
   </div>
   <div class="card-body">
-<form th:action="@{//users/getAll}" method="post" th:object="${user}">
+<form th:action="@{/users/getAll}" method="post" th:object="${user}">
 
   <div class="form-group">
     <label for="recipient-Id">Id</label>
@@ -29,6 +30,7 @@
   <div class="form-group">
     <label for="recipient-name">Name</label>
     <input type="text" class="form-control" id="recipient-name" aria-describedby="emailHelp" th:field="*{name}">
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">Enter name</span>
   </div>
  
   <div class="form-group">
@@ -44,36 +46,42 @@
 	<div class="form-check form-check-inline">
   	<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Other" th:field="*{sex}">
   	<label class="form-check-label" for="inlineRadio2">Other</label>
+  	<span th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}" class="error">Enter sex</span>
    	</div>
    </div>
 
   <div class="form-group">
     <label for="recipient-email">Email</label>
     <input type="email" class="form-control" id="recipient-email" aria-describedby="emailHelp" th:field="*{email}">
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">Enter email</span>
   </div>
   
   <div class="form-group">
     <label for="recipient-phone">Phone</label>
     <input type="tel" class="form-control" id="recipient-phone" th:field="*{phone}">
+    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="error">Enter phone</span>
   </div>
   
   <div class="form-group">
     <label for="recipient-address">Address</label>
     <input type="text" class="form-control" id="recipient-address" th:field="*{address}">
+    <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="error">Enter address</span>
   </div>
   
   <div class="form-group">
-    <label for="recipient-department">Course</label>
+    <label for="recipient-department">Department</label>
     <select class="form-control" id="recipient-department" th:field="*{department}">
       <option th:each="department : ${department}" th:value="${department}"  th:text="${department}"/>
     </select>
+    <span th:if="${#fields.hasErrors('department')}" th:errors="*{department}" class="error">Enter department</span>
   </div> 
 
    <div class="form-group">
           
             </div>
             </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="card-body">
+  <button type="submit" class="btn btn-primary">Save</button>
 </form>    
   </div>
 </div>

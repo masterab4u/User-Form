@@ -1,21 +1,25 @@
 package com.example.singlepageApp.controllers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-//import java.util.Optional;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+//import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.ResponseBody;
+//import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.singlepageApp.services.UserService;
 import com.example.singlepageApp.models.User;
+import com.example.singlepageApp.services.UserService;
+
 
 @Controller
 @RequestMapping("/users")
@@ -46,20 +50,26 @@ public class UserController {
 		model.addAttribute("users", users);
 		model.addAttribute("department", department);
 		
-		//String username = "Avinash";
-		//model.addAttribute("username", username);
+		String username = "Avinash";
+		model.addAttribute("username", username);
 		
 		return "users";
 	}
 	
-	@RequestMapping(value = "/save",method = RequestMethod.POST)
-	 public String register(@ModelAttribute("user") User user, Model model) {
-	  System.out.println("get users:::"+user.getUser());
-	  UserService service = null;
-	service.save(user);
-	  return "welcome";
-	 }
+	@RequestMapping("/getOne")
+	@ResponseBody
+	public Optional<User> getOne(Integer Id) {
+		return userService.getOne(Id);
+	}
 	
+	@PostMapping("/getAll")
+	//public String addNew(@Valid @ModelAttribute("users") User user, BindingResult result, Model model) {
+	public String addNew(@Valid User user, BindingResult result) {
+		if(result.hasErrors()) {
+		      return "redirect:/users/getAll";
+	    }
+		userService.addNew(user);
+		return "redirect:/users/getAll";
+	}
 	
-
 }

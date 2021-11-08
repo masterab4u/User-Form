@@ -1,12 +1,10 @@
 package com.example.singlepageApp.models;
 
 import javax.persistence.Entity;
-//import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-//import javax.validation.constraints.NotEmpty;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
@@ -16,9 +14,6 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-//import org.hibernate.validator.constraints.NotBlank;
-
-//import net.bytebuddy.implementation.bind.annotation.Empty;
 
 @Entity
 @Table(name = "user")
@@ -29,25 +24,20 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
-	@NotEmpty//(message = "Field can't be left empty")
-	@Size(min=2, max=30)//, message = "Has to be in 2-30 chars range")
-	//@Column(name = "name")
+	@NotEmpty(message = "Please enter your full name")
+	@Size(min=2, max=30, message = "Has to be in 2-30 chars range")
 	private String name;
-	@NotBlank//(message = "Gender can't be left empty")
-	//@Column(name = "sex")
+	@NotBlank(message = "Gender can't be left empty")
 	private String sex;
-	//@Column(name = "email")
-	@Email//(message = "Please enter a valid e-mail address")
+	@NotEmpty(message = "Please enter email address.")
+	@Email(message = "Please enter a valid e-mail address")
 	private String email;
 	@NotNull
-	@Size(min=10, max=10)//, message = "Enter a valid number")
-	//@Column(name = "phone")
+	@Size(min=10, max=10, message = "Enter a valid number")
 	private String phone;
 	@Size(max = 100)
-	//@Column(name = "address")
 	private String address;
-	@NotBlank//(message = "Department can't be left empty")
-	//@Column(name = "department")
+	@NotBlank(message = "Department can't be left empty")
 	private String department;
 	
 	public User() {
@@ -128,7 +118,7 @@ public class User {
 	}
 
 	public String getUser() {
-		// TODO Auto-generated method stub
+		//TODO Auto-generated method stub
 		return null;
 	}
 

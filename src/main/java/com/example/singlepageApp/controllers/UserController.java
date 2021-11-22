@@ -8,11 +8,16 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,13 +49,14 @@ public class UserController {
 		return "users";
 	}
 	
-	@RequestMapping("/getOne")
+	@PostMapping("/save")
 	@ResponseBody
-	public Optional<User> getOne(Integer Id) {
-		return userService.getOne(Id);
+	public ResponseEntity<User> saveUser(@RequestBody User user) {
+		userService.saveUser(user);
+		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
 	
-	@PostMapping(value = "/users/getAll", produces = {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(value = "/users/getAll", produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public List<User> addNew(User user) {
 		userService.addNew(user);

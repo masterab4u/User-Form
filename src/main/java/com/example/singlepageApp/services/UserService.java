@@ -21,10 +21,11 @@ public class UserService {
 	public List<User> getAll() {
 		return (List<User>) userRepository.findAll();
 	}
+	
 
 	
-	public Optional<User> getOne(Integer Id) {
-		return userRepository.findById(Id);
+	public void saveUser(User user) {
+		userRepository.save(user);
 	}
 
 	public void addNew(User user) {

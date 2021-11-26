@@ -23,21 +23,17 @@
   <div class="card-body">
 <form id="form" th:object="${user}">
 
-  <div class="form-group">
-    <label for="Id">ID:</label> 
-    <input type="text" class="form-control" id="Id" placeholder="Enter Id" name="Id">
-  </div>
   
   <div class="form-group">
     <label for="name">Name:</label>
     <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name">
   </div>
  
-  <div class="form-group">
+  <div class="btn-group">
     <label for="sex">Sex:</label>
-	<label><input type="radio" name="option" value="Male">Male</label>
-    <label><input type="radio"  name="option" value="Female">Female</label>
-    <label><input type="radio" name="option" value="Others">Others</label>
+	<label><input type="radio" name="sex" value="male">Male</label>
+    <label><input type="radio"  name="sex" value="female">Female</label>
+    <label><input type="radio" name="sex" value="others">Others</label>
   </div>
 
   <div class="form-group">
@@ -79,13 +75,13 @@
 <br>
 <!-- /.container -->
 
-<div class="container mt-5">
+<div class="container mt-5" id="user-table-container">
 <div class="card" style="width: 55rem;;">
   <div class="card-header text-center bg-info ">
     <h3>USER LIST</h3>
   </div>
 
-<table class="table table-stripped">
+<table class="table table-stripped" id="user-table">
 <thead>
 <tr>
 <td>Id</td>
